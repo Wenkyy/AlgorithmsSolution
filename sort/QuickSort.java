@@ -10,30 +10,44 @@ public class QuickSort{
 		if(array == null && array.length == 0){
 			return array;
 		}
-		partition(array,0,array.length-1);
+		quickSort(array,0,array.length-1);
 		return array;
 
 	}
-	public void partition(int[] arr, int head, int tail){
+
+	public void quickSort(int[] arr, int head, int tail){
 		if(head >= tail){
 			return;
 		}
+		
+		int pivotIndex = partition(arr,head, tail);
+		
+		quickSort(arr,head,pivotIndex-1);
+		quickSort(arr,pivotIndex+1,tail);
+
+	}
+	public int partition(int[] arr, int head, int tail){
 		int pivotIndex = tail;
 		int pivotValue = arr[pivotIndex];
 		int endOfScannedArray = tail - 1;
 		int startOfScannedArray = head;
 
 		while(startOfScannedArray <= endOfScannedArray){
-			if(arr[startOfScannedArray] > pivotValue){
-				swap(arr,startOfScannedArray,endOfScannedArray--);
+			// if(arr[startOfScannedArray] > pivotValue){
+			// 	swap(arr,startOfScannedArray,endOfScannedArray--);
+			// }else{
+			// 	startOfScannedArray++;
+			// }
+			if(arr[startOfScannedArray] < pivotValue){
+				startOfScannedArray ++;
+			}else if(arr[endOfScannedArray] > pivotValue){
+				endOfScannedArray --;
 			}else{
-				startOfScannedArray++;
+				swap(arr,startOfScannedArray++,endOfScannedArray--);
 			}
 		}
 		swap(arr,startOfScannedArray,pivotIndex);
-		partition(arr,head,startOfScannedArray-1);
-		partition(arr,startOfScannedArray+1,tail);
-
+		return startOfScannedArray;
 	}
 	public void swap(int[] arr, int a, int b){
 		int temp = arr[a];

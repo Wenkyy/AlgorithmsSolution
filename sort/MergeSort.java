@@ -46,4 +46,18 @@ public class MergeSort{
 }
 
 // time complexity O(nlogn)
+//  3 4 5 7 0 6 1 2   O(1)
+//       /     \
+// 3 4 5 7  0 6 1 2  O(1)*2 
+//   /\         /\
+// 34  57    06  12   O(1)*4 
+// /\  /\    /\  /\
+//3 4 5 7  0  6 1  2   
+// .......				O(1)*n   （a1 - anq)/(1-q) = O(n)
+//\/  \/   \/   \/      O(n) // need loop both sub array 
+//34  57   06   12   
+//  \/       \/
+// 3457     0126       O(n)
+//     \   /
+//   01234567         O(n)  // total is O(nlogn)
 // space complexity O(n)
